@@ -15,16 +15,19 @@ permission. The drawings are **not** licensed for any reuse. See [LICENSE](LICEN
 ## Structure
 
 ```
-index.html       Home + About
-work.html        Overview (Security / Web / Art)
-security.html    Cybersecurity & network work
-web.html         Web projects
-art.html         Drawings & visual work
-styles.css       Shared styles
-script.js        Shared scripts
-assets/          Website screenshots + assets/art/ drawings
+index.html            Home + About (site entry point — stays at root)
+pages/
+  work.html           Overview (Security / Web / Art)
+  security.html       Cybersecurity & network work
+  web.html            Web projects
+  art.html            Drawings & visual work
+css/styles.css        Shared styles
+js/script.js          Shared scripts
+assets/
+  web/                Website screenshots
+  art/                Drawings
 ```
 
 ## Contact
 
-mypermis@hotmail.com
+alvi.edilkhanov@gmail.com
