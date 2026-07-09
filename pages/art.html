@@ -3,69 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Alvi's art — drawings & manga-style illustration.">
+<meta name="description" content="Alvi's art — drawings, details and evolution.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Alvi — Art &amp; Manga</title>
+<title>Alvi — Art</title>
 <link rel="stylesheet" href="../css/styles.css">
 <style>
-  :root{--ink:#ece7da;--paper:#0c0d10}
-  /* darken the base + gritty grain overlay */
-  body{background:#050506}
-  .grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  :root{--serif:Georgia,"Times New Roman",serif}
+  body{background:#060608}
 
-  .manga-hero{position:relative;padding:112px 0 30px;overflow:hidden}
-  .manga-hero .kanji{position:absolute;right:14px;top:56px;font-size:150px;line-height:.9;color:rgba(236,231,218,.045);font-weight:900;writing-mode:vertical-rl;letter-spacing:8px;pointer-events:none;user-select:none}
-  .manga-hero .tag{font-family:var(--mono);color:var(--red);letter-spacing:4px;font-size:.78rem;font-weight:700}
-  .manga-hero h1{font-family:var(--mono);font-size:clamp(2.4rem,6.5vw,4.2rem);font-weight:900;letter-spacing:-1.5px;margin:12px 0 6px;color:var(--ink);position:relative;display:inline-block}
-  .manga-hero h1 .ink{display:block;height:6px;width:120px;background:var(--red);margin-top:10px;transform:skewX(-18deg);box-shadow:6px 0 0 rgba(179,0,27,.35)}
-  .manga-hero p{color:var(--dim);max-width:620px;margin-top:14px}
-  .manga-hero .meta{font-family:var(--mono);font-size:.72rem;color:var(--dim);border:1px solid var(--border);padding:6px 12px;border-radius:4px;display:inline-flex;gap:10px;margin-top:20px}
-  .manga-hero .meta b{color:var(--ink)}
+  /* intro */
+  .art-intro{padding:130px 0 10px}
+  .art-intro .k{font-family:var(--mono);color:var(--red);letter-spacing:4px;font-size:.78rem;font-weight:700}
+  .art-intro h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.8rem,8vw,6rem);line-height:1;letter-spacing:-1px;margin:16px 0 8px}
+  .art-intro h1 em{font-style:italic;color:var(--dim)}
+  .art-intro p{color:var(--dim);max-width:560px;font-size:1.08rem}
+  .scrollhint{display:flex;align-items:center;gap:12px;margin-top:44px;font-family:var(--mono);font-size:.74rem;color:var(--dim);letter-spacing:2px}
+  .scrollhint .arw{width:1px;height:34px;background:var(--dim);position:relative;overflow:hidden}
+  .scrollhint .arw::after{content:"";position:absolute;left:-1px;top:-100%;width:3px;height:100%;background:var(--green);animation:drop 1.8s ease-in-out infinite}
+  @keyframes drop{0%{top:-100%}60%,100%{top:100%}}
 
-  .planche{display:grid;gap:12px;padding:24px 0 8px;
-    grid-template-columns:repeat(4,1fr);
-    grid-template-rows:repeat(3,minmax(200px,25vh));
-    grid-template-areas:
-      "p1 p1 p2 p2"
-      "p1 p1 p3 p3"
-      "p4 p5 p5 p6";}
-  .panel{position:relative;overflow:hidden;background:var(--paper);border:3px solid var(--ink);
-    box-shadow:7px 7px 0 rgba(0,0,0,.55);transition:transform .25s}
-  .panel:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0 rgba(179,0,27,.35)}
-  .p1{grid-area:p1}.p2{grid-area:p2}.p3{grid-area:p3}.p4{grid-area:p4}.p5{grid-area:p5}.p6{grid-area:p6}
-  .panel img{width:100%;height:100%;object-fit:cover;display:block;
-    filter:grayscale(1) contrast(1.12) brightness(.92);transition:filter .45s ease,transform .6s ease}
-  .panel:hover img{filter:none;transform:scale(1.05)}
-  .panel .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);color:#33363e;font-size:.9rem;letter-spacing:3px}
-  /* screentone dots in the shadows */
-  .panel::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:radial-gradient(rgba(0,0,0,.55) 1px,transparent 1.5px);background-size:5px 5px;
-    opacity:.22;mix-blend-mode:multiply}
-  /* panel number, top-right, manga style */
-  .panel .no{position:absolute;top:0;right:0;font-family:var(--mono);font-size:.7rem;font-weight:800;
-    color:var(--ink);background:var(--red);padding:3px 8px;letter-spacing:1px;z-index:3}
-  /* narration / caption box */
-  .panel .box{position:absolute;left:0;bottom:0;max-width:82%;background:rgba(8,8,10,.92);
-    border-top:2px solid var(--ink);border-right:2px solid var(--ink);padding:11px 14px;z-index:3;
-    backdrop-filter:blur(2px)}
-  .panel .box h3{font-family:var(--mono);color:var(--ink);font-size:.86rem;font-weight:800;letter-spacing:.5px}
-  .panel .box p{color:var(--dim);font-size:.75rem;margin-top:5px;line-height:1.45;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:-webkit-line-clamp .3s}
-  .panel:hover .box p{-webkit-line-clamp:6}
+  /* progress rail */
+  .rail{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;gap:16px;align-items:center}
+  .rail a{width:11px;height:11px;border-radius:50%;border:1px solid #3a3d47;transition:.3s;display:block}
+  .rail a.on{background:var(--green);border-color:var(--green);box-shadow:0 0 12px var(--green);transform:scale(1.25)}
+  .rail .cap{writing-mode:vertical-rl;font-family:var(--mono);font-size:.62rem;color:#4a4d57;letter-spacing:3px;margin-top:6px}
 
-  .backrow{padding:30px 0 90px}
+  /* featured */
+  .feature{position:relative;min-height:100vh;display:flex;align-items:center;padding:90px 0;border-top:1px solid var(--border)}
+  .feat-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:58px;align-items:center;width:100%}
+  .feature[data-side="right"] .feat-art{order:2}
+  .feature[data-side="right"] .feat-grid{grid-template-columns:.88fr 1.12fr}
+  .feat-art{position:relative}
+  .feat-art .idx{position:absolute;font-family:var(--mono);font-weight:900;font-size:clamp(5rem,14vw,11rem);color:rgba(255,255,255,.045);top:-.42em;left:-.06em;z-index:0;pointer-events:none;user-select:none}
+  .feature[data-side="right"] .feat-art .idx{left:auto;right:-.06em}
+  .imgbox{position:relative;z-index:1;overflow:hidden;border:1px solid var(--border);border-radius:6px;background:var(--panel)}
+  .imgbox .ph{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:#2b2e37;letter-spacing:3px}
+  .imgbox img{display:block;width:100%;height:auto;
+    clip-path:inset(0 100% 0 0);transform:scale(1.07);
+    transition:clip-path 1.15s cubic-bezier(.76,0,.24,1),transform 1.35s cubic-bezier(.76,0,.24,1)}
+  .feature[data-side="right"] .imgbox img{clip-path:inset(0 0 0 100%)}
+  .feature.in .imgbox img{clip-path:inset(0 0 0 0);transform:scale(1)}
 
-  @media(max-width:820px){
-    .manga-hero .kanji{display:none}
-    .planche{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:none}
-    .panel{grid-area:auto!important;height:64vw;min-height:260px}
+  .feat-text .k{font-family:var(--mono);color:var(--red);letter-spacing:3px;font-size:.76rem;font-weight:700}
+  .feat-text h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.1rem);font-weight:700;letter-spacing:-.5px;margin:14px 0 16px;line-height:1.05}
+  .feat-text p{color:var(--dim);font-size:1.04rem;max-width:46ch}
+  .feat-text .meta{font-family:var(--mono);font-size:.74rem;color:var(--dim);margin-top:20px;display:flex;gap:22px;flex-wrap:wrap}
+  .feat-text .meta b{color:var(--text);font-weight:600}
+  .feat-text .rr{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .feature.in .feat-text .rr{opacity:1;transform:none}
+  .feature.in .feat-text .rr:nth-child(1){transition-delay:.15s}
+  .feature.in .feat-text .rr:nth-child(2){transition-delay:.28s}
+  .feature.in .feat-text .rr:nth-child(3){transition-delay:.41s}
+  .feature.in .feat-text .rr:nth-child(4){transition-delay:.54s}
+
+  /* details / zooms */
+  .feat-details{grid-column:1 / -1;margin-top:56px}
+  .fd-head{font-family:var(--mono);font-size:.72rem;letter-spacing:3px;color:var(--green);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .fd-head::after{content:"";height:1px;flex:1;background:var(--border)}
+  .fd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .zoom-card{display:flex;gap:18px;align-items:center;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;opacity:0;transform:translateY(20px) scale(.98);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .feature.in .zoom-card{opacity:1;transform:none}
+  .feature.in .zoom-card:nth-child(2){transition-delay:.15s}
+  .zoom{flex:0 0 128px;width:128px;height:128px;border-radius:8px;border:1px solid var(--border);
+    background-repeat:no-repeat;background-size:300%;position:relative;overflow:hidden;
+    animation:breathe 9s ease-in-out infinite alternate}
+  .zoom::after{content:"";position:absolute;inset:0;border:1px solid rgba(0,255,136,.25);border-radius:8px}
+  .zoom.z-a{background-position:26% 22%}
+  .zoom.z-b{background-position:72% 64%}
+  .zoom.z-c{background-position:40% 78%}
+  .zoom.z-d{background-position:60% 20%}
+  @keyframes breathe{from{background-size:300%}to{background-size:345%}}
+  .zoom-card .zc h5{font-family:var(--mono);font-size:.82rem;color:var(--text);letter-spacing:.4px}
+  .zoom-card .zc h5 span{color:var(--green);margin-right:7px}
+  .zoom-card .zc p{color:var(--dim);font-size:.83rem;margin-top:6px;line-height:1.45}
+
+  /* gallery */
+  .gallery{padding:120px 0 40px;border-top:1px solid var(--border)}
+  .gal-head{margin-bottom:44px}
+  .gal-head .k{font-family:var(--mono);color:var(--green);letter-spacing:3px;font-size:.76rem}
+  .gal-head h2{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,3rem);font-weight:700;margin-top:10px}
+  .gal-head p{color:var(--dim);margin-top:10px;max-width:560px}
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .gitem{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:8px;background:var(--panel);
+    opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .gitem.show{opacity:1;transform:none}
+  .gitem .box{aspect-ratio:4/5;position:relative}
+  .gitem .box .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:#2b2e37;font-size:.85rem;letter-spacing:2px}
+  .gitem img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease}
+  .gitem:hover img{transform:scale(1.06)}
+  .gcap{position:absolute;left:0;bottom:0;right:0;padding:12px 14px;background:linear-gradient(0deg,rgba(6,6,8,.9),transparent);font-family:var(--mono);font-size:.78rem;color:var(--text)}
+  .gcap span{color:var(--dim);display:block;font-size:.72rem;margin-top:2px}
+
+  /* evolution item (spans 2, auto-cycles frames) */
+  .evo{grid-column:span 2;position:relative;overflow:hidden;border:1px solid var(--border);border-radius:8px;background:var(--panel);
+    opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .evo.show{opacity:1;transform:none}
+  .evo .stack{position:relative;aspect-ratio:16/10}
+  .evo .stack .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:#2b2e37;letter-spacing:2px}
+  .evo .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+  .evo .stack img.active{opacity:1}
+  .evo .badge{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:.68rem;color:var(--green);border:1px solid var(--green);padding:4px 9px;border-radius:5px;background:rgba(6,6,8,.6);letter-spacing:1px;z-index:3}
+  .evo .steps{position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:3}
+  .evo .steps span{font-family:var(--mono);font-size:.68rem;padding:4px 9px;border:1px solid var(--border);background:rgba(6,6,8,.7);color:var(--dim);border-radius:5px;transition:.3s}
+  .evo .steps span.on{color:#000;background:var(--green);border-color:var(--green)}
+  .evo .lab{position:absolute;left:0;bottom:0;right:0;padding:14px 16px;background:linear-gradient(0deg,rgba(6,6,8,.92),transparent);font-family:var(--mono);font-size:.8rem;color:var(--text);z-index:3}
+  .evo .lab span{color:var(--dim);display:block;font-size:.73rem;margin-top:3px}
+
+  .backrow{padding:40px 0 96px}
+
+  @media(max-width:860px){
+    .feat-grid,.feature[data-side="right"] .feat-grid{grid-template-columns:1fr;gap:34px}
+    .feature[data-side="right"] .feat-art{order:0}
+    .fd-grid{grid-template-columns:1fr}
+    .gal-grid{grid-template-columns:1fr 1fr}
+    .evo{grid-column:span 2}
+    .rail{display:none}
+    .feature{min-height:auto;padding:70px 0}
   }
+  @media(max-width:520px){.gal-grid{grid-template-columns:1fr}.evo{grid-column:span 1}}
 </style>
 </head>
 <body>
-<div class="grain"></div>
 
 <header>
   <div class="wrap">
@@ -84,61 +142,161 @@
   </div>
 </header>
 
-<section class="manga-hero">
-  <div class="kanji">画集</div>
+<!-- progress rail -->
+<nav class="rail" aria-hidden="true">
+  <a href="#f1" data-i="0"></a>
+  <a href="#f2" data-i="1"></a>
+  <a href="#f3" data-i="2"></a>
+  <span class="cap">SCROLL</span>
+</nav>
+
+<!-- intro -->
+<section class="art-intro">
   <div class="wrap">
-    <div class="tag reveal">画集 · SEINEN SKETCHBOOK</div>
-    <h1 class="reveal">The other side of the pen.<span class="ink"></span></h1>
-    <p class="reveal">Away from the terminal, I draw. Ink, shadow and manga — here's a page from the sketchbook, laid out like a real planche. Hover a panel to bring it to life.</p>
-    <div class="meta reveal"><span>medium: <b>ink / digital</b></span><span>style: <b>seinen</b></span></div>
+    <div class="k reveal">// 04 — art</div>
+    <h1 class="reveal">Drawings, <em>up close.</em></h1>
+    <p class="reveal">Scroll through a few pieces one by one — with the details that make them, and how some of them came to life.</p>
+    <div class="scrollhint reveal"><span>scroll</span><span class="arw"></span></div>
   </div>
 </section>
 
-<section>
+<!-- FEATURED 1 -->
+<section class="feature" id="f1" data-side="left">
   <div class="wrap">
-    <div class="planche">
+    <div class="feat-grid">
+      <div class="feat-art">
+        <div class="idx" data-par="0.08">01</div>
+        <div class="imgbox">
+          <div class="ph" data-ph>drawing 01</div>
+          <img src="../assets/art/art1.jpg" alt="Artwork 1" loading="lazy" onerror="this.style.display='none';var p=this.parentNode.querySelector('[data-ph]');if(p)p.style.display='flex';">
+        </div>
+      </div>
+      <div class="feat-text">
+        <div class="k rr">01 — featured</div>
+        <h2 class="rr">Untitled — piece one</h2>
+        <p class="rr">A line or two about this drawing: the subject, the mood, the tools you used and why it matters to you. Replace this with your own words.</p>
+        <div class="meta rr"><span>year · <b>2025</b></span><span>medium · <b>ink</b></span></div>
+      </div>
 
-      <article class="panel p1">
-        <span class="no">01</span>
-        <span class="ph">drawing 01</span>
-        <img src="../assets/art/art1.jpg" alt="Drawing 1" loading="lazy" onerror="this.style.display='none'">
-        <div class="box"><h3>The Protagonist</h3><p>Your flagship piece — the one you're proudest of. Describe the subject, the tools (ink, brush pen, digital) and the story behind it. Replace this text.</p></div>
-      </article>
+      <div class="feat-details">
+        <div class="fd-head">details</div>
+        <div class="fd-grid">
+          <div class="zoom-card">
+            <div class="zoom z-a" style="background-image:url('../assets/art/art1.jpg')"></div>
+            <div class="zc"><h5><span>01</span>The linework</h5><p>Point out a detail here — a texture, a line, an expression. Adjust the zoom target in the CSS if needed.</p></div>
+          </div>
+          <div class="zoom-card">
+            <div class="zoom z-b" style="background-image:url('../assets/art/art1.jpg')"></div>
+            <div class="zc"><h5><span>02</span>The eyes</h5><p>A second detail worth zooming into, with a short note on what you were going for.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <article class="panel p2">
-        <span class="no">02</span>
-        <span class="ph">drawing 02</span>
-        <img src="../assets/art/art2.jpg" alt="Drawing 2" loading="lazy" onerror="this.style.display='none'">
-        <div class="box"><h3>Ink Study</h3><p>A line or two about this drawing — mood, technique, what you were going for.</p></div>
-      </article>
+<!-- FEATURED 2 -->
+<section class="feature" id="f2" data-side="right">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat-art">
+        <div class="idx" data-par="0.08">02</div>
+        <div class="imgbox">
+          <div class="ph" data-ph>drawing 02</div>
+          <img src="../assets/art/art2.jpg" alt="Artwork 2" loading="lazy" onerror="this.style.display='none';var p=this.parentNode.querySelector('[data-ph]');if(p)p.style.display='flex';">
+        </div>
+      </div>
+      <div class="feat-text">
+        <div class="k rr">02 — featured</div>
+        <h2 class="rr">Untitled — piece two</h2>
+        <p class="rr">Tell the story of this piece. Keep it personal and short — what inspired it, what you like about it.</p>
+        <div class="meta rr"><span>year · <b>2025</b></span><span>medium · <b>digital</b></span></div>
+      </div>
 
-      <article class="panel p3">
-        <span class="no">03</span>
-        <span class="ph">drawing 03</span>
-        <img src="../assets/art/art3.jpg" alt="Drawing 3" loading="lazy" onerror="this.style.display='none'">
-        <div class="box"><h3>Scene</h3><p>Describe the moment or the character here. Short and punchy.</p></div>
-      </article>
+      <div class="feat-details">
+        <div class="fd-head">details</div>
+        <div class="fd-grid">
+          <div class="zoom-card">
+            <div class="zoom z-c" style="background-image:url('../assets/art/art2.jpg')"></div>
+            <div class="zc"><h5><span>01</span>The shading</h5><p>Zoom on a shaded area — describe the technique or the light.</p></div>
+          </div>
+          <div class="zoom-card">
+            <div class="zoom z-d" style="background-image:url('../assets/art/art2.jpg')"></div>
+            <div class="zc"><h5><span>02</span>The texture</h5><p>A second close-up and its short description.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <article class="panel p4">
-        <span class="no">04</span>
-        <span class="ph">drawing 04</span>
-        <img src="../assets/art/art4.jpg" alt="Drawing 4" loading="lazy" onerror="this.style.display='none'">
-        <div class="box"><h3>Sketch</h3><p>Quick note on this one.</p></div>
-      </article>
+<!-- FEATURED 3 -->
+<section class="feature" id="f3" data-side="left">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat-art">
+        <div class="idx" data-par="0.08">03</div>
+        <div class="imgbox">
+          <div class="ph" data-ph>drawing 03</div>
+          <img src="../assets/art/art3.jpg" alt="Artwork 3" loading="lazy" onerror="this.style.display='none';var p=this.parentNode.querySelector('[data-ph]');if(p)p.style.display='flex';">
+        </div>
+      </div>
+      <div class="feat-text">
+        <div class="k rr">03 — featured</div>
+        <h2 class="rr">Untitled — piece three</h2>
+        <p class="rr">Your description for the third featured drawing goes here. Make it yours.</p>
+        <div class="meta rr"><span>year · <b>2025</b></span><span>medium · <b>pencil</b></span></div>
+      </div>
 
-      <article class="panel p5">
-        <span class="no">05</span>
-        <span class="ph">drawing 05</span>
-        <img src="../assets/art/art5.jpg" alt="Drawing 5" loading="lazy" onerror="this.style.display='none'">
-        <div class="box"><h3>Portrait</h3><p>Tell the story of this piece — inspiration, medium, what makes it yours.</p></div>
-      </article>
+      <div class="feat-details">
+        <div class="fd-head">details</div>
+        <div class="fd-grid">
+          <div class="zoom-card">
+            <div class="zoom z-a" style="background-image:url('../assets/art/art3.jpg')"></div>
+            <div class="zc"><h5><span>01</span>Composition</h5><p>Point at a compositional choice or focal point.</p></div>
+          </div>
+          <div class="zoom-card">
+            <div class="zoom z-b" style="background-image:url('../assets/art/art3.jpg')"></div>
+            <div class="zc"><h5><span>02</span>Highlights</h5><p>A second detail and its caption.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <article class="panel p6">
-        <span class="no">06</span>
-        <span class="ph">drawing 06</span>
-        <img src="../assets/art/art6.jpg" alt="Drawing 6" loading="lazy" onerror="this.style.display='none'">
-        <div class="box"><h3>Concept</h3><p>A short caption for this drawing.</p></div>
-      </article>
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="wrap">
+    <div class="gal-head">
+      <div class="k">// the gallery</div>
+      <h2>More drawings</h2>
+      <p>The rest of the sketchbook. Some pieces show their evolution — from first sketch to final.</p>
+    </div>
+    <div class="gal-grid">
+
+      <!-- evolution item: multiple frames auto-cycle -->
+      <figure class="evo">
+        <span class="badge">▶ evolution</span>
+        <div class="steps"><span class="on">01</span><span>02</span><span>03</span></div>
+        <div class="stack">
+          <div class="ph" data-ph>evolution</div>
+          <img class="active" src="../assets/art/evo1-1.jpg" alt="Evolution step 1" loading="lazy" onerror="this.style.display='none'">
+          <img src="../assets/art/evo1-2.jpg" alt="Evolution step 2" loading="lazy" onerror="this.style.display='none'">
+          <img src="../assets/art/evo1-3.jpg" alt="Evolution step 3" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <figcaption class="lab">From sketch to final<span>Drop 2–4 stages: evo1-1.jpg, evo1-2.jpg, evo1-3.jpg…</span></figcaption>
+      </figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>drawing 04</div><img src="../assets/art/art4.jpg" alt="Artwork 4" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Untitled IV<span>short caption</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>drawing 05</div><img src="../assets/art/art5.jpg" alt="Artwork 5" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Untitled V<span>short caption</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>drawing 06</div><img src="../assets/art/art6.jpg" alt="Artwork 6" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Untitled VI<span>short caption</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>drawing 07</div><img src="../assets/art/art7.jpg" alt="Artwork 7" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Untitled VII<span>short caption</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>drawing 08</div><img src="../assets/art/art8.jpg" alt="Artwork 8" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Untitled VIII<span>short caption</span></figcaption></figure>
 
     </div>
 
@@ -153,5 +311,68 @@
 </footer>
 
 <script src="../js/script.js"></script>
+<script>
+  // for each placeholder: hide it if the sibling image actually loads
+  document.querySelectorAll('[data-ph]').forEach(function(ph){
+    var img=ph.parentNode.querySelector('img');
+    if(img){ if(img.complete && img.naturalWidth>0){ph.style.display='none';}
+      img.addEventListener('load',function(){ph.style.display='none';}); }
+  });
+
+  // featured reveal + progress rail
+  var feats=[].slice.call(document.querySelectorAll('.feature'));
+  var rail=[].slice.call(document.querySelectorAll('.rail a'));
+  var fo=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        var i=feats.indexOf(e.target);
+        rail.forEach(function(a,j){a.classList.toggle('on',j===i);});
+      }
+    });
+  },{threshold:.35});
+  feats.forEach(function(f){fo.observe(f);});
+
+  // gallery items reveal (staggered)
+  var go=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); go.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.gitem,.evo').forEach(function(el,i){el.style.transitionDelay=(i%3*0.08)+'s';go.observe(el);});
+
+  // evolution auto-cycle (only while visible)
+  document.querySelectorAll('.evo').forEach(function(evo){
+    var imgs=[].slice.call(evo.querySelectorAll('.stack img'));
+    var dots=[].slice.call(evo.querySelectorAll('.steps span'));
+    if(imgs.length<2) return;
+    var i=0,timer=null;
+    function tick(){
+      i=(i+1)%imgs.length;
+      imgs.forEach(function(im,j){im.classList.toggle('active',j===i);});
+      dots.forEach(function(d,j){d.classList.toggle('on',j===i);});
+    }
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ if(!timer) timer=setInterval(tick,1600); }
+        else { clearInterval(timer); timer=null; }
+      });
+    },{threshold:.3});
+    io.observe(evo);
+  });
+
+  // subtle parallax on the big index numbers
+  var pars=[].slice.call(document.querySelectorAll('[data-par]'));
+  function par(){
+    var vh=window.innerHeight;
+    pars.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      var c=(r.top+r.height/2)-vh/2;
+      var f=parseFloat(el.getAttribute('data-par'))||0.06;
+      el.style.transform='translateY('+(c*-f)+'px)';
+    });
+  }
+  window.addEventListener('scroll',par,{passive:true});
+  window.addEventListener('resize',par);
+  par();
+</script>
 </body>
 </html>
