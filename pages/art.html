@@ -3,12 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Alvi's art — drawings and visual work.">
+<meta name="description" content="Alvi's art — drawings & manga-style illustration.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Alvi — Art &amp; Drawing</title>
+<title>Alvi — Art &amp; Manga</title>
 <link rel="stylesheet" href="../css/styles.css">
+<style>
+  :root{--ink:#ece7da;--paper:#0c0d10}
+  /* darken the base + gritty grain overlay */
+  body{background:#050506}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .manga-hero{position:relative;padding:112px 0 30px;overflow:hidden}
+  .manga-hero .kanji{position:absolute;right:14px;top:56px;font-size:150px;line-height:.9;color:rgba(236,231,218,.045);font-weight:900;writing-mode:vertical-rl;letter-spacing:8px;pointer-events:none;user-select:none}
+  .manga-hero .tag{font-family:var(--mono);color:var(--red);letter-spacing:4px;font-size:.78rem;font-weight:700}
+  .manga-hero h1{font-family:var(--mono);font-size:clamp(2.4rem,6.5vw,4.2rem);font-weight:900;letter-spacing:-1.5px;margin:12px 0 6px;color:var(--ink);position:relative;display:inline-block}
+  .manga-hero h1 .ink{display:block;height:6px;width:120px;background:var(--red);margin-top:10px;transform:skewX(-18deg);box-shadow:6px 0 0 rgba(179,0,27,.35)}
+  .manga-hero p{color:var(--dim);max-width:620px;margin-top:14px}
+  .manga-hero .meta{font-family:var(--mono);font-size:.72rem;color:var(--dim);border:1px solid var(--border);padding:6px 12px;border-radius:4px;display:inline-flex;gap:10px;margin-top:20px}
+  .manga-hero .meta b{color:var(--ink)}
+
+  .planche{display:grid;gap:12px;padding:24px 0 8px;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:repeat(3,minmax(200px,25vh));
+    grid-template-areas:
+      "p1 p1 p2 p2"
+      "p1 p1 p3 p3"
+      "p4 p5 p5 p6";}
+  .panel{position:relative;overflow:hidden;background:var(--paper);border:3px solid var(--ink);
+    box-shadow:7px 7px 0 rgba(0,0,0,.55);transition:transform .25s}
+  .panel:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0 rgba(179,0,27,.35)}
+  .p1{grid-area:p1}.p2{grid-area:p2}.p3{grid-area:p3}.p4{grid-area:p4}.p5{grid-area:p5}.p6{grid-area:p6}
+  .panel img{width:100%;height:100%;object-fit:cover;display:block;
+    filter:grayscale(1) contrast(1.12) brightness(.92);transition:filter .45s ease,transform .6s ease}
+  .panel:hover img{filter:none;transform:scale(1.05)}
+  .panel .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);color:#33363e;font-size:.9rem;letter-spacing:3px}
+  /* screentone dots in the shadows */
+  .panel::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(0,0,0,.55) 1px,transparent 1.5px);background-size:5px 5px;
+    opacity:.22;mix-blend-mode:multiply}
+  /* panel number, top-right, manga style */
+  .panel .no{position:absolute;top:0;right:0;font-family:var(--mono);font-size:.7rem;font-weight:800;
+    color:var(--ink);background:var(--red);padding:3px 8px;letter-spacing:1px;z-index:3}
+  /* narration / caption box */
+  .panel .box{position:absolute;left:0;bottom:0;max-width:82%;background:rgba(8,8,10,.92);
+    border-top:2px solid var(--ink);border-right:2px solid var(--ink);padding:11px 14px;z-index:3;
+    backdrop-filter:blur(2px)}
+  .panel .box h3{font-family:var(--mono);color:var(--ink);font-size:.86rem;font-weight:800;letter-spacing:.5px}
+  .panel .box p{color:var(--dim);font-size:.75rem;margin-top:5px;line-height:1.45;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:-webkit-line-clamp .3s}
+  .panel:hover .box p{-webkit-line-clamp:6}
+
+  .backrow{padding:30px 0 90px}
+
+  @media(max-width:820px){
+    .manga-hero .kanji{display:none}
+    .planche{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:none}
+    .panel{grid-area:auto!important;height:64vw;min-height:260px}
+  }
+</style>
 </head>
 <body>
+<div class="grain"></div>
 
 <header>
   <div class="wrap">
@@ -27,68 +84,65 @@
   </div>
 </header>
 
-<section class="page-head">
+<section class="manga-hero">
+  <div class="kanji">画集</div>
   <div class="wrap">
-    <div class="sec-num reveal">// 04 — art</div>
-    <h1 class="reveal">Art <span class="accent">&amp;</span> drawing</h1>
-    <p class="reveal">The creative side. A collection of drawings and visual pieces I've made — each with the story behind it.</p>
+    <div class="tag reveal">画集 · SEINEN SKETCHBOOK</div>
+    <h1 class="reveal">The other side of the pen.<span class="ink"></span></h1>
+    <p class="reveal">Away from the terminal, I draw. Ink, shadow and manga — here's a page from the sketchbook, laid out like a real planche. Hover a panel to bring it to life.</p>
+    <div class="meta reveal"><span>medium: <b>ink / digital</b></span><span>style: <b>seinen</b></span></div>
   </div>
 </section>
 
-<section class="block" style="border-top:none;padding-top:40px">
+<section>
   <div class="wrap">
-    <div class="art-grid">
+    <div class="planche">
 
-      <article class="art reveal">
-        <div class="imgwrap"><span class="ph">drawing 01</span><img src="../assets/art/art1.jpg" alt="Drawing 1" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="cap">
-          <h3>Untitled I</h3>
-          <p>A short line about this piece — what it is, when you made it, the technique (pencil, ink, digital…) and what inspired it. Replace this with your own words.</p>
-        </div>
+      <article class="panel p1">
+        <span class="no">01</span>
+        <span class="ph">drawing 01</span>
+        <img src="../assets/art/art1.jpg" alt="Drawing 1" loading="lazy" onerror="this.style.display='none'">
+        <div class="box"><h3>The Protagonist</h3><p>Your flagship piece — the one you're proudest of. Describe the subject, the tools (ink, brush pen, digital) and the story behind it. Replace this text.</p></div>
       </article>
 
-      <article class="art reveal">
-        <div class="imgwrap"><span class="ph">drawing 02</span><img src="../assets/art/art2.jpg" alt="Drawing 2" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="cap">
-          <h3>Untitled II</h3>
-          <p>Describe the story behind this drawing here — mood, subject, medium and anything that makes it special to you.</p>
-        </div>
+      <article class="panel p2">
+        <span class="no">02</span>
+        <span class="ph">drawing 02</span>
+        <img src="../assets/art/art2.jpg" alt="Drawing 2" loading="lazy" onerror="this.style.display='none'">
+        <div class="box"><h3>Ink Study</h3><p>A line or two about this drawing — mood, technique, what you were going for.</p></div>
       </article>
 
-      <article class="art reveal">
-        <div class="imgwrap"><span class="ph">drawing 03</span><img src="../assets/art/art3.jpg" alt="Drawing 3" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="cap">
-          <h3>Untitled III</h3>
-          <p>A mini description for this piece. Keep it to one or two sentences — enough to give context and personality.</p>
-        </div>
+      <article class="panel p3">
+        <span class="no">03</span>
+        <span class="ph">drawing 03</span>
+        <img src="../assets/art/art3.jpg" alt="Drawing 3" loading="lazy" onerror="this.style.display='none'">
+        <div class="box"><h3>Scene</h3><p>Describe the moment or the character here. Short and punchy.</p></div>
       </article>
 
-      <article class="art reveal">
-        <div class="imgwrap"><span class="ph">drawing 04</span><img src="../assets/art/art4.jpg" alt="Drawing 4" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="cap">
-          <h3>Untitled IV</h3>
-          <p>Tell the story of this drawing — the idea, the process, why it matters. Replace with your own text.</p>
-        </div>
+      <article class="panel p4">
+        <span class="no">04</span>
+        <span class="ph">drawing 04</span>
+        <img src="../assets/art/art4.jpg" alt="Drawing 4" loading="lazy" onerror="this.style.display='none'">
+        <div class="box"><h3>Sketch</h3><p>Quick note on this one.</p></div>
       </article>
 
-      <article class="art reveal">
-        <div class="imgwrap"><span class="ph">drawing 05</span><img src="../assets/art/art5.jpg" alt="Drawing 5" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="cap">
-          <h3>Untitled V</h3>
-          <p>A short caption goes here. Mention the medium and the inspiration behind the piece.</p>
-        </div>
+      <article class="panel p5">
+        <span class="no">05</span>
+        <span class="ph">drawing 05</span>
+        <img src="../assets/art/art5.jpg" alt="Drawing 5" loading="lazy" onerror="this.style.display='none'">
+        <div class="box"><h3>Portrait</h3><p>Tell the story of this piece — inspiration, medium, what makes it yours.</p></div>
       </article>
 
-      <article class="art reveal">
-        <div class="imgwrap"><span class="ph">drawing 06</span><img src="../assets/art/art6.jpg" alt="Drawing 6" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="cap">
-          <h3>Untitled VI</h3>
-          <p>Your description here — what this work represents and how you made it.</p>
-        </div>
+      <article class="panel p6">
+        <span class="no">06</span>
+        <span class="ph">drawing 06</span>
+        <img src="../assets/art/art6.jpg" alt="Drawing 6" loading="lazy" onerror="this.style.display='none'">
+        <div class="box"><h3>Concept</h3><p>A short caption for this drawing.</p></div>
       </article>
 
     </div>
-    <div style="margin-top:44px" class="reveal">
+
+    <div class="backrow reveal">
       <a href="work.html" class="btn btn-ghost">← back to my_work</a>
     </div>
   </div>
