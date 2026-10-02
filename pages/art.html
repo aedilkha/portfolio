@@ -111,6 +111,15 @@
 
   .backrow{padding:40px 0 96px}
 
+  /* image lightbox */
+  .lightbox{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:28px;background:rgba(3,3,5,.92);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+  .lightbox.open{opacity:1;visibility:visible}
+  .lightbox img{max-width:min(1120px,92vw);max-height:86vh;width:auto;height:auto;object-fit:contain;border:1px solid var(--border);box-shadow:0 24px 80px rgba(0,0,0,.65);pointer-events:auto;user-select:none}
+  .lightbox-close{position:absolute;top:20px;right:24px;width:42px;height:42px;border:1px solid var(--border);border-radius:6px;background:var(--panel);color:var(--text);font:700 1.2rem var(--mono);cursor:pointer}
+  .lightbox-close:hover{border-color:var(--green);color:var(--green)}
+  .lightbox-caption{position:absolute;left:28px;bottom:22px;color:var(--dim);font:700 .72rem var(--mono);letter-spacing:1px}
+  .lightbox-target{cursor:zoom-in;pointer-events:auto}
+
   @media(max-width:860px){
     .feat-grid,.feature[data-side="right"] .feat-grid{grid-template-columns:1fr;gap:34px}
     .feature[data-side="right"] .feat-art{order:0}
@@ -306,6 +315,12 @@
   </div>
 </section>
 
+<div class="lightbox" id="artLightbox" role="dialog" aria-modal="true" aria-label="Expanded artwork" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Close expanded artwork">×</button>
+  <img src="" alt="">
+  <div class="lightbox-caption"></div>
+</div>
+
 <footer>
   <div class="wrap">© <span id="year"></span> alvi <span class="g">·</span> built in Brussels <span class="g">·</span> <span class="g">&gt;_</span></div>
 </footer>
@@ -373,6 +388,45 @@
   window.addEventListener('scroll',par,{passive:true});
   window.addEventListener('resize',par);
   par();
+
+  // artwork lightbox: expand full images without cropping
+  var lightbox=document.getElementById('artLightbox');
+  var lightboxImg=lightbox.querySelector('img');
+  var lightboxCaption=lightbox.querySelector('.lightbox-caption');
+  var lightboxClose=lightbox.querySelector('.lightbox-close');
+  function openLightbox(src,alt){
+    if(!src) return;
+    lightboxImg.src=src;
+    lightboxImg.alt=alt||'Expanded artwork';
+    lightboxCaption.textContent=alt||'';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    lightboxClose.focus();
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    lightboxImg.src='';
+  }
+  document.querySelectorAll('.imgbox img,.gitem img,.evo .stack img').forEach(function(img){
+    img.classList.add('lightbox-target');
+    img.addEventListener('click',function(){openLightbox(img.currentSrc||img.src,img.alt);});
+  });
+  document.querySelectorAll('.zoom').forEach(function(zoom){
+    var background=window.getComputedStyle(zoom).backgroundImage;
+    var match=background.match(/url\(["']?(.*?)["']?\)/);
+    if(!match) return;
+    zoom.classList.add('lightbox-target');
+    zoom.addEventListener('click',function(){
+      var heading=zoom.parentNode.querySelector('h5');
+      openLightbox(match[1],heading?heading.textContent:'Artwork detail');
+    });
+  });
+  lightboxClose.addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',function(e){if(e.target===lightbox)closeLightbox();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox();});
 </script>
 </body>
 </html>
