@@ -89,8 +89,8 @@
   .gitem.show{opacity:1;transform:none}
   .gitem .box{aspect-ratio:4/5;position:relative}
   .gitem .box .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:#2b2e37;font-size:.85rem;letter-spacing:2px}
-  .gitem img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease}
-  .gitem:hover img{transform:scale(1.06)}
+  .gitem img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .6s ease,filter .6s ease}
+  .gitem:hover img{transform:scale(1.03)}
   .gcap{position:absolute;left:0;bottom:0;right:0;padding:12px 14px;background:linear-gradient(0deg,rgba(6,6,8,.9),transparent);font-family:var(--mono);font-size:.78rem;color:var(--text)}
   .gcap span{color:var(--dim);display:block;font-size:.72rem;margin-top:2px}
 
@@ -100,7 +100,7 @@
   .evo.show{opacity:1;transform:none}
   .evo .stack{position:relative;aspect-ratio:16/10}
   .evo .stack .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:#2b2e37;letter-spacing:2px}
-  .evo .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+  .evo .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .9s ease}
   .evo .stack img.active{opacity:1}
   .evo .badge{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:.68rem;color:var(--green);border:1px solid var(--green);padding:4px 9px;border-radius:5px;background:rgba(6,6,8,.6);letter-spacing:1px;z-index:3}
   .evo .steps{position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:3}
@@ -277,15 +277,14 @@
 
       <!-- evolution item: multiple frames auto-cycle -->
       <figure class="evo">
-        <span class="badge">▶ evolution</span>
-        <div class="steps"><span class="on">01</span><span>02</span><span>03</span></div>
+        <span class="badge">▶ illustration</span>
+        <div class="steps"><span class="on">01</span><span>02</span></div>
         <div class="stack">
           <div class="ph" data-ph>evolution</div>
-          <img class="active" src="../assets/art/aruvi-bayusan-style.jpg" alt="Aruvi and Bayusan style study" loading="eager" decoding="async" onerror="this.style.display='none'">
-          <img src="../assets/art/aruvi-vs-arubi.jpg" alt="Aruvi versus Arubi" loading="eager" decoding="async" onerror="this.style.display='none'">
-          <img src="../assets/art/bayusan-panel.jpg" alt="Bayusan panel" loading="eager" decoding="async" onerror="this.style.display='none'">
+          <img class="active" src="../assets/art/daremo-illustration.jpg" alt="Daremo illustration" loading="eager" decoding="async" onerror="this.style.display='none'">
+          <img src="../assets/art/daremo-panel.jpg" alt="Daremo illustration detail" loading="eager" decoding="async" onerror="this.style.display='none'">
         </div>
-        <figcaption class="lab">Character studies<span>A small sequence exploring related character designs and styles.</span></figcaption>
+        <figcaption class="lab">Daremo illustration<span>Illustration</span></figcaption>
       </figure>
 
       <figure class="gitem"><div class="box"><div class="ph" data-ph>falling sky</div><img src="../assets/art/falling-sky-panel.jpg" alt="Falling Sky" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Falling Sky<span>Character panel</span></figcaption></figure>
