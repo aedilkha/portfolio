@@ -46,7 +46,7 @@
 
   .feat-text .k{font-family:var(--mono);color:var(--red);letter-spacing:3px;font-size:.76rem;font-weight:700}
   .feat-text h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.1rem);font-weight:700;letter-spacing:-.5px;margin:14px 0 16px;line-height:1.05}
-  .feat-text p{color:var(--dim);font-size:1.04rem;max-width:46ch}
+  .feat-text p{color:#b9bec8;font-size:1.04rem;max-width:46ch;text-shadow:0 1px 10px rgba(0,0,0,.45)}
   .feat-text .meta{font-family:var(--mono);font-size:.74rem;color:var(--dim);margin-top:20px;display:flex;gap:22px;flex-wrap:wrap}
   .feat-text .meta b{color:var(--text);font-weight:600}
   .feat-text .rr{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -75,7 +75,7 @@
   @keyframes breathe{from{background-size:300%}to{background-size:345%}}
   .zoom-card .zc h5{font-family:var(--mono);font-size:.82rem;color:var(--text);letter-spacing:.4px}
   .zoom-card .zc h5 span{color:var(--green);margin-right:7px}
-  .zoom-card .zc p{color:var(--dim);font-size:.83rem;margin-top:6px;line-height:1.45}
+  .zoom-card .zc p{color:#b9bec8;font-size:.83rem;margin-top:6px;line-height:1.45;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 
   /* gallery */
   .gallery{padding:120px 0 40px;border-top:1px solid var(--border)}
@@ -92,7 +92,7 @@
   .gitem img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .6s ease,filter .6s ease}
   .gitem:hover img{transform:scale(1.03)}
   .gcap{position:absolute;left:0;bottom:0;right:0;padding:12px 14px;background:linear-gradient(0deg,rgba(6,6,8,.9),transparent);font-family:var(--mono);font-size:.78rem;color:var(--text)}
-  .gcap span{color:var(--dim);display:block;font-size:.72rem;margin-top:2px}
+  .gcap span{color:#c1c6cf;display:block;font-size:.72rem;margin-top:2px;text-shadow:0 1px 6px #060608}
 
   /* evolution item (spans 2, auto-cycles frames) */
   .evo{grid-column:span 2;position:relative;overflow:hidden;border:1px solid var(--border);border-radius:8px;background:var(--panel);
@@ -107,7 +107,7 @@
   .evo .steps span{font-family:var(--mono);font-size:.68rem;padding:4px 9px;border:1px solid var(--border);background:rgba(6,6,8,.7);color:var(--dim);border-radius:5px;transition:.3s}
   .evo .steps span.on{color:#000;background:var(--green);border-color:var(--green)}
   .evo .lab{position:absolute;left:0;bottom:0;right:0;padding:14px 16px;background:linear-gradient(0deg,rgba(6,6,8,.92),transparent);font-family:var(--mono);font-size:.8rem;color:var(--text);z-index:3}
-  .evo .lab span{color:var(--dim);display:block;font-size:.73rem;margin-top:3px}
+  .evo .lab span{color:#c1c6cf;display:block;font-size:.73rem;margin-top:3px;text-shadow:0 1px 6px #060608}
 
   .backrow{padding:40px 0 96px}
 
@@ -156,6 +156,8 @@
   <a href="#f1" data-i="0"></a>
   <a href="#f2" data-i="1"></a>
   <a href="#f3" data-i="2"></a>
+  <a href="#f4" data-i="3"></a>
+  <a href="#f5" data-i="4"></a>
   <span class="cap">SCROLL</span>
 </nav>
 
@@ -219,7 +221,7 @@
         <div class="k rr">02 — featured</div>
         <h2 class="rr">No One. Someone.</h2>
         <p class="rr">this is Daremo. "Daremo" is a name caught between two meanings: someone and no one. A contradiction that mirrors his existence. To the government, he is nothing more than a disposable tool. To himself, he is an empty shell searching for the emotions that were taken from him long ago.</p>
-        <div class="meta rr"><span>year · <b>2024</b></span><span>medium · <b>digital</b></span></div>
+        <div class="meta rr"><span>year · <b>2023</b></span><span>medium · <b>digital</b></span></div>
       </div>
 
       <div class="feat-details">
@@ -254,7 +256,7 @@
         <div class="k rr">03 — featured</div>
         <h2 class="rr">Young Alvi</h2>
         <p class="rr">A moment from the character's youth: surrounded by noise and movement, a strange manifestation takes shape behind him. What first feels like an echo of the commotion becomes a giant creature known as the Walking Wave.</p>
-        <div class="meta rr"><span>year · <b>2025</b></span><span>medium · <b>pencil</b></span></div>
+        <div class="meta rr"><span>year · <b>2022</b></span><span>medium · <b>pencil</b></span></div>
       </div>
 
       <div class="feat-details">
@@ -267,6 +269,72 @@
           <div class="zoom-card">
             <div class="zoom z-b" style="background-image:url('../assets/art/young-aruvi.jpg')"></div>
             <div class="zc"><h5><span>02</span>A Hand Between Worlds</h5><p>This detail is about the connection between character and environment: the hand touching the wall, gravity pulling through the pose, the folds of the clothing and the texture of the bricks.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED 4 -->
+<section class="feature" id="f4" data-side="right">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat-art">
+        <div class="idx" data-par="0.08">04</div>
+        <div class="imgbox">
+          <div class="ph" data-ph>drawing 04</div>
+          <img src="../assets/art/daremo-panel.jpg" alt="Daremo Panel" loading="eager" decoding="async" onerror="this.style.display='none';var p=this.parentNode.querySelector('[data-ph]');if(p)p.style.display='flex';">
+        </div>
+      </div>
+      <div class="feat-text">
+        <div class="k rr">04 — featured</div>
+        <h2 class="rr">Daremo Panel</h2>
+        <p class="rr">One of my favourite panels. Daremo is a complex character I have been developing through the previous Daremo illustration: a cold government assassin, shaped into a weapon that follows every order without emotion or hesitation. This piece took a long time to build, from his presence and expression to the atmosphere around him.</p>
+        <div class="meta rr"><span>year · <b>2024</b></span><span>medium · <b>digital</b></span></div>
+      </div>
+
+      <div class="feat-details">
+        <div class="fd-head">details</div>
+        <div class="fd-grid">
+          <div class="zoom-card">
+            <div class="zoom z-c" style="background-image:url('../assets/art/daremo-panel.jpg');background-position:50% 24%"></div>
+            <div class="zc"><h5><span>01</span>The Assassin's Face</h5><p>The face carries Daremo's distance and control: a character trained to execute orders while keeping everything human buried underneath.</p></div>
+          </div>
+          <div class="zoom-card">
+            <div class="zoom z-d" style="background-image:url('../assets/art/daremo-panel.jpg');background-position:62% 72%"></div>
+            <div class="zc"><h5><span>02</span>The Hand and the Weapon</h5><p>The hand, clothing and weapon work together to connect Daremo to his role: precise, restrained and built around the government's control.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED 5 -->
+<section class="feature" id="f5" data-side="left">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat-art">
+        <div class="idx" data-par="0.08">05</div>
+        <div class="imgbox">
+          <div class="ph" data-ph>drawing 05</div>
+          <img src="../assets/art/madmen-panel.png" alt="Madmen Panel" loading="eager" decoding="async" onerror="this.style.display='none';var p=this.parentNode.querySelector('[data-ph]');if(p)p.style.display='flex';">
+        </div>
+      </div>
+      <div class="feat-text">
+        <div class="k rr">05 — featured</div>
+        <h2 class="rr">Madmen Panel</h2>
+        <p class="rr">A panel built around the tension between two characters who should never meet. The expressions, framing and sharp contrast were especially fun to develop.</p>
+        <div class="meta rr"><span>year · <b>2025</b></span><span>medium · <b>digital</b></span></div>
+      </div>
+
+      <div class="feat-details">
+        <div class="fd-head">details</div>
+        <div class="fd-grid">
+          <div class="zoom-card">
+            <div class="zoom z-d" style="background-image:url('../assets/art/madmen-panel.png');background-position:50% 50%"></div>
+            <div class="zc"><h5><span>01</span>The Lower Face</h5><p>A close look at the lower character's face and the small details that make the scene feel tense and alive.</p></div>
           </div>
         </div>
       </div>
@@ -306,6 +374,12 @@
       <figure class="gitem"><div class="box"><div class="ph" data-ph>sniper</div><img src="../assets/art/sniper-panel.jpg" alt="Sniper" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Sniper<span>A long and rewarding panel to draw, based on a real sniper with snow and atmosphere built into the scene.</span></figcaption></figure>
 
       <figure class="gitem"><div class="box"><div class="ph" data-ph>shodo</div><img src="../assets/art/shodo-panel.jpg" alt="Shodo" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Shodo<span>A character panel where it was fun to build the smoke, movement and surrounding details.</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>biraru old</div><img src="../assets/art/biraru-old.jpg" alt="Biraru old" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Biraru — early version<span>An earlier character study from the same world.</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>bayusan</div><img src="../assets/art/bayusan-panel.jpg" alt="Bayusan" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Bayusan<span>A character panel exploring the creature's design and silhouette.</span></figcaption></figure>
+
+      <figure class="gitem"><div class="box"><div class="ph" data-ph>aruvi and arubi</div><img src="../assets/art/aruvi-vs-arubi.jpg" alt="Aruvi versus Arubi" loading="lazy" onerror="this.style.display='none'"></div><figcaption class="gcap">Aruvi vs Arubi<span>A character study built around contrast and movement.</span></figcaption></figure>
 
     </div>
 
