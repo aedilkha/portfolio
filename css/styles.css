@@ -51,8 +51,8 @@ nav{display:flex;align-items:center;justify-content:space-between;height:72px;ga
 .nav-links a.glitch{text-shadow:2px 0 var(--red),-2px 0 var(--green)}
 .nav-links a.active{color:var(--green);border-color:var(--green-dim);background:rgba(0,255,136,.05)}
 /* hire me button + readable hover */
-.nav-cta{font-family:var(--mono);font-size:.82rem;color:#000;background:var(--green);padding:10px 16px;border:1px solid var(--green);border-radius:8px;font-weight:700;transition:transform .18s,background .2s,color .2s,box-shadow .2s}
-.nav-cta:hover{background:#000;color:var(--green);transform:translateY(-2px);box-shadow:0 0 0 1px var(--green),0 8px 24px rgba(0,255,136,.25)}
+.nav-cta,.nav-links a.nav-cta{font-family:var(--mono);font-size:.82rem;color:#000;background:var(--green);padding:10px 16px;border:1px solid var(--green);border-radius:8px;font-weight:700;transition:transform .18s,background .2s,color .2s,box-shadow .2s}
+.nav-cta:hover,.nav-links a.nav-cta:hover{background:#000;color:var(--green);transform:translateY(-2px);box-shadow:0 0 0 1px var(--green),0 8px 24px rgba(0,255,136,.25)}
 .menu-btn{display:none;background:none;border:0;color:var(--green);font-size:1.4rem;cursor:pointer;font-family:var(--mono)}
 
 /* ===== HERO ===== */

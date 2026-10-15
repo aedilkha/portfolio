@@ -42,7 +42,7 @@
     clip-path:inset(0 100% 0 0);transform:scale(1.07);
     transition:clip-path 1.15s cubic-bezier(.76,0,.24,1),transform 1.35s cubic-bezier(.76,0,.24,1)}
   .feature[data-side="right"] .imgbox img{clip-path:inset(0 0 0 100%)}
-  .feature.in .imgbox img{clip-path:inset(0 0 0 0);transform:scale(1)}
+  .imgbox.in img{clip-path:inset(0 0 0 0);transform:scale(1)}
 
   .feat-text .k{font-family:var(--mono);color:var(--red);letter-spacing:3px;font-size:.76rem;font-weight:700}
   .feat-text h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.1rem);font-weight:700;letter-spacing:-.5px;margin:14px 0 16px;line-height:1.05}
@@ -50,11 +50,11 @@
   .feat-text .meta{font-family:var(--mono);font-size:.74rem;color:var(--dim);margin-top:20px;display:flex;gap:22px;flex-wrap:wrap}
   .feat-text .meta b{color:var(--text);font-weight:600}
   .feat-text .rr{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-  .feature.in .feat-text .rr{opacity:1;transform:none}
-  .feature.in .feat-text .rr:nth-child(1){transition-delay:.15s}
-  .feature.in .feat-text .rr:nth-child(2){transition-delay:.28s}
-  .feature.in .feat-text .rr:nth-child(3){transition-delay:.41s}
-  .feature.in .feat-text .rr:nth-child(4){transition-delay:.54s}
+  .feat-text.in .rr{opacity:1;transform:none}
+  .feat-text.in .rr:nth-child(1){transition-delay:.15s}
+  .feat-text.in .rr:nth-child(2){transition-delay:.28s}
+  .feat-text.in .rr:nth-child(3){transition-delay:.41s}
+  .feat-text.in .rr:nth-child(4){transition-delay:.54s}
 
   /* details / zooms */
   .feat-details{grid-column:1 / -1;order:3;margin-top:56px}
@@ -62,8 +62,8 @@
   .fd-head::after{content:"";height:1px;flex:1;background:var(--border)}
   .fd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
   .zoom-card{display:flex;flex-direction:column;gap:14px;align-items:stretch;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;opacity:0;transform:translateY(20px) scale(.98);transition:.7s cubic-bezier(.2,.7,.2,1)}
-  .feature.in .zoom-card{opacity:1;transform:none}
-  .feature.in .zoom-card:nth-child(2){transition-delay:.15s}
+  .zoom-card.in{opacity:1;transform:none}
+  .zoom-card.in:nth-child(2){transition-delay:.15s}
   .zoom{width:100%;height:640px;border-radius:8px;border:1px solid var(--border);
     background-repeat:no-repeat;background-size:300%;position:relative;overflow:hidden;
     animation:breathe 9s ease-in-out infinite alternate}
@@ -123,6 +123,9 @@
   @media(max-width:860px){
     .feat-grid,.feature[data-side="right"] .feat-grid{grid-template-columns:1fr;gap:34px}
     .feature[data-side="right"] .feat-art{order:0}
+    .feat-text{order:-1}
+    .feat-details{margin-top:24px}
+    .zoom{height:min(640px,115vw)}
     .fd-grid{grid-template-columns:1fr}
     .gal-grid{grid-template-columns:1fr 1fr}
     .evo{grid-column:span 2}
@@ -408,19 +411,24 @@
       img.addEventListener('load',function(){ph.style.display='none';}); }
   });
 
-  // featured reveal + progress rail
+  // featured reveal: each part animates on its own, so tall sections on mobile still show
+  var fo=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); fo.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.imgbox,.feat-text,.zoom-card').forEach(function(el){fo.observe(el);});
+
+  // progress rail: highlight the section crossing the middle of the screen
   var feats=[].slice.call(document.querySelectorAll('.feature'));
   var rail=[].slice.call(document.querySelectorAll('.rail a'));
-  var fo=new IntersectionObserver(function(es){
+  var ro=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(e.isIntersecting){
-        e.target.classList.add('in');
         var i=feats.indexOf(e.target);
         rail.forEach(function(a,j){a.classList.toggle('on',j===i);});
       }
     });
-  },{threshold:.35});
-  feats.forEach(function(f){fo.observe(f);});
+  },{rootMargin:'-50% 0px -50% 0px'});
+  feats.forEach(function(f){ro.observe(f);});
 
   // gallery items reveal (staggered)
   var go=new IntersectionObserver(function(es){
